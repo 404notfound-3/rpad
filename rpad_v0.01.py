@@ -147,6 +147,7 @@ def change_font_family(main_application):
     global current_font_family
     current_font_family = font_family.get()
     text_editor.configure(font = (current_font_family, current_font_size))
+    status_bar.config(font = (current_font_family, 12, "bold"))
 
 def change_font_size(main_application):
     global current_font_size
@@ -195,7 +196,6 @@ def align_left():
     text_editor.tag_config('left', justify=tk.LEFT)
     text_editor.delete(1.0, tk.END)
     text_editor.insert(tk.INSERT, text_content, 'left')
-
 align_left_button.configure(command=align_left)
 
 ## center 
@@ -204,7 +204,6 @@ def align_center():
     text_editor.tag_config('center', justify=tk.CENTER)
     text_editor.delete(1.0, tk.END)
     text_editor.insert(tk.INSERT, text_content, 'center')
-
 align_center_button.configure(command=align_center)
 
 ## right 
@@ -221,8 +220,8 @@ text_editor.configure(font = ("Arial", 12))
 
 #==================================================================================== Main Status Bar =========================================================================================
 
-status_bar = ttk.Label(main_application, text = "Status Bar")
-status_bar.pack(side = tk.BOTTOM)
+status_bar = tk.Label(main_application, text = "Status Bar", font = ('arial', 12, "bold"))
+status_bar.pack(side = tk.BOTTOM, fill = tk.X, padx = 0, pady = 1)
 
 text_changed = False
 def changed(event = None):
@@ -442,6 +441,7 @@ def change_theme():
     color_tuple = color_dict.get(chosen_theme)
     fg_color, bg_color = color_tuple[0], color_tuple[1]
     text_editor.configure(background = bg_color, fg = fg_color)
+    status_bar.config(background = bg_color, foreground = fg_color, font = (current_font_family, 12, "bold"))
 
 count = 0
 for i in color_dict:
@@ -459,5 +459,6 @@ main_application.bind("<Control-s>", save_file)
 main_application.bind("<Control-Shift-s>", save_as)
 main_application.bind("<Control-q>", exit_func)
 main_application.bind("<Control-f>", find_func)
+main_application.bind("<Control-l>", align_left)
 
 main_application.mainloop()
