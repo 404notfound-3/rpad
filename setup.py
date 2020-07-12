@@ -14,7 +14,7 @@ executables = [cx_Freeze.Executable("rpad.py", base=base, icon=r"icons\icon.ico"
 cx_Freeze.setup(
     name = "Rpad Text Editor",
     options = {"build_exe": {"packages":["tkinter","os"], "include_files":['tcl86t.dll','tk86t.dll', 'icons']}},
-    version = "0.03",
+    version = "0.04",
     description = "Tkinter Application",
     executables = executables
     )
